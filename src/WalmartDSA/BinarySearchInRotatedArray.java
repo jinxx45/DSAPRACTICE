@@ -1,39 +1,43 @@
 package WalmartDSA;
 
-public class BinarySearchInRotatedArray {
+public class  BinarySearchInRotatedArray {
     public static void main(String[] args) {
         int arr[] = {4,5,6,1,2,3};
-        int target = 3;
+        int target = 4;
 
-        int left = 0;
-        int right = arr.length-1;
-        int mid = 0;
+        int n = arr.length;
 
-        while(left<=right){
-            mid = left + (right-left) / 2;
+        int low = 0;
+        int high = n-1;
 
-            if(arr[mid] == target) {System.out.println("Found AT index " + mid); return;}
+        while(low<=high){
+            int mid = low+ (high-low) /2;
 
-            //left half sorted
-            if(arr[left] <= arr[mid]){
-                if(arr[left] <= target && target<= arr[mid]){
-                    right = mid-1;
+            if(arr[mid] == target) {System.out.println("Found at " + mid); return;};
+
+            //left part is sorted
+            if(arr[mid]>=arr[low]){
+                if(arr[low]<= target && target<arr[mid]){
+                    high = mid-1;
                 }
                 else{
-                    left = mid+1;
+                    low = mid+1;
                 }
             }
+
+            //right part is sorted
             else{
-                if(arr[left] <= target && target<= arr[mid]){
-                    right = mid-1;
+                if(arr[mid] <= target && target <= arr[high]){
+                    low = mid+1;
                 }
                 else{
-                    left = mid+1;
+                    high = mid-1;
                 }
             }
-
 
         }
-        System.out.println("Element not found");
+
+        System.out.println("Not found !!");
+
     }
 }
